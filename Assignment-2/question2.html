@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script>
+
+        class queenAttack {
+            constructor(queen1row, queen1col, queen2row, queen2col) {
+                this.queen1row = queen1row;
+                this.queen1col = queen1col;
+                this.queen2row = queen2row;
+                this.queen2col = queen2col;
+            }
+            canAttack() {
+                if (this.queen1row == this.queen2row)
+                    return true;
+                if (this.queen1col == this.queen2col)
+                    return true;
+                if (Math.abs(this.queen1row - this.queen2row) == Math.abs(this.queen1col - this.queen2col))
+                    return true;
+
+                return false;
+            }
+        }
+        let queens = new queenAttack(0, 0, 7, 7);
+        if (queens.canAttack())
+            console.log("YES, THE QUEENS CAN ATTACK EACH OTHER")
+        else
+            console.log("NO, THE QUEENS CANNOT ATTACK EACH OTHER")
+
+    </script>
+</head>
+
+<body>
+    <p>console here</p>
+</body>
+
+</html>

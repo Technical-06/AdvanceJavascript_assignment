@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script>
+        async function nobelPrizeInfo() {
+            const response = await fetch("http://api.nobelprize.org/v1/prize.json ");
+            const data = await response.json();
+
+            const res = data.prizes.filter((prizes) => {
+                return (
+                    prizes.year >= 2000 && prizes.year <= 2019
+                    && prizes.category == "chemistry"
+                );
+            });
+
+            console.log(res);
+        }
+        nobelPrizeInfo();
+    </script>
+</head>
+
+<body>
+    <p>Console here</p>
+</body>
+
+</html>

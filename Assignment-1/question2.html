@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script>
+        async function GithubRepo(repoName) {
+            const apiResponse = await fetch(
+                `https://api.github.com/search/repositories?q=${repoName}`
+            );
+
+            const res = await apiResponse.json();
+
+            res.items.map((repo) => result(repo));
+        }
+
+        async function result(repo) {
+            const ownerResponse = await fetch(repo.owner.url);
+            const ownersData = await ownerResponse.json();
+
+            const branchResponse = await fetch(repo.branches_url.split("{")[0]);
+            const branchData = await branchResponse.json();
+
+            const result = {
+                name: repo.name,
+                full_name: repo.full_name,
+                private: repo.private,
+                owner: {
+                    login: ownersData.login,
+                    name: ownersData.name,
+                    followersCount: ownersData.followers,
+                    followingCount: ownersData.following,
+                },
+                licenseName: repo.license,
+                score: repo.score,
+                numberOfBranch: branchData.length,
+            };
+
+            console.log(result);
+        }
+
+        GithubRepo("Thunderbolt9");
+    </script>
+</head>
+
+<body>
+    <p>console here</p>
+</body>
+
+</html>
